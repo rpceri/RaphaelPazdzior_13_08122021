@@ -10,7 +10,7 @@
 -    "react-scripts": "4.0.3",
 -    "redux": "^4.1.2",
 -    "web-vitals": "^1.0.1"
-
+-    babel-plugin-macros & fontawesome
 ## Data sources
 This project useg an API to get datats. see
 [Project #10 - Argent Bank API](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API)

@@ -1,12 +1,14 @@
 
 import './App.css';
-import Routes from './Components/Routes.js';
+
+import RoutesApp from './RoutesApp.js';
+
 import Footer from './Components/Footer.jsx';
 
 function App() {
   return (
     <div className="App">
-        <Routes />
+        <RoutesApp />
         <Footer />
     </div>
   );

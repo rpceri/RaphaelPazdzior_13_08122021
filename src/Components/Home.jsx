@@ -1,4 +1,3 @@
-import Nav from './Nav.jsx';
 import { useEffect } from 'react';
 
 function Home() {
@@ -9,7 +8,6 @@ function Home() {
   
     return (
 <>
-    <Nav />
     <main>
       <div className="hero">
         <section className="hero-content">

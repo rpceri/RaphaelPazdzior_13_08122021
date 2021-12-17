@@ -1,3 +1,18 @@
+/* ajout du style de app pour avoir fond complet : */
+.App { 
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.form-error {
+  color: red;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-top: 0.2rem;
+  margin-left: 0.2rem;
+}
+/* fin ajout des styles en plus */
+
 html {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

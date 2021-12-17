@@ -1,14 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App.js';
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from 'react-redux'; // C’est grâce au Provider que useDispatch et useSelector auront accès au store. il doit englober toute l'app et attend une prop store store Redux
+import configureStore from './configureStore.js'; // utile pour provider
 
+const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
