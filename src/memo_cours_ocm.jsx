@@ -8,8 +8,6 @@ const resetButton = document.getElementById("reset");
 const pauseButton = document.getElementById("pause");
 
 player1Button.addEventListener("click", () => {
-  // Ce code s'exécute lorsque le bouton "Point Joueur 1" est cliqué
-  // On envoie une action avec dispatch
   // pointScored est un action creator (une fonction qui retourne une action)
   // il faut donc exécuter la fonction pour obtenir l'action et l'envoyer au store
   store.dispatch(pointScored("player1"));
