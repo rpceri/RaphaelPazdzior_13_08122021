@@ -51,7 +51,7 @@ const loginReducer = (state = {token: '', status: '', message: ''}, action) => {
         return state
     }
     else if(action.type === 'LOGIN_SUCCESS') {
-        alert('LOGIN_SUCCESS')
+        //alert('LOGIN_SUCCESS')
         return state = {
             token: action.payload.token,
             status: action.payload.status,

@@ -3,9 +3,10 @@ export const loginUserTTT = (username, password) => ({
 })
 
 
-export const loginUser = (username, password) => {
+export const LoginUser = (username, password, navigate) => {
+
     //alert (username + ' , ' + password)
-    return function(dispatch) {
+    return (dispatch) => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -18,11 +19,12 @@ export const loginUser = (username, password) => {
             .then(response => response.json())
             .then(data => {
                 try {
-                    console.log('success', data)
+                    console.log('success sign in', data)
                     dispatch(loginSuccess(data.body.token, data.status, data.message));
-                    dispatch(accessProfile(data.body.token));
+                    dispatch(AccessProfile(data.body.token, navigate))
+
                 } catch(e) {
-                    console.log('error', data)
+                    console.log('error', e)
                 }
             })
             .catch(error => {
@@ -32,8 +34,9 @@ export const loginUser = (username, password) => {
 }
 
 // appelée par loginUser
-export const accessProfile = (token) => {
-    return function(dispatch) {
+export const AccessProfile = (token, navigate) => {
+
+    return (dispatch) => {
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -46,10 +49,13 @@ export const accessProfile = (token) => {
             .then(response => response.json())
             .then(data => {
                 try {
-                    console.log('success', data) // renvoie  status: 200, message: "Successfully got user profile data", enc as de succès
+                    console.log('success get profile', data) // renvoie  status: 200, message: "Successfully got user profile data", enc as de succès
                     dispatch(receiveData(data.body, data.status));
+                    let nouvellePage = `/user`
+                    console.log('navigat : ', nouvellePage) 
+                    navigate(nouvellePage);
                 } catch(e) {
-                    console.log('error 1', data)
+                    console.log('error 1', e)
                 }
             })
             .catch(error => {
