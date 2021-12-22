@@ -8,7 +8,7 @@
   import EditProfile from "./Components/EditProfile.jsx";
 
   import Nav from './Components/Nav.jsx';
-
+  import Footer from './Components/Footer.jsx';
   function RoutesApp() {
       return (
         <BrowserRouter>
@@ -17,9 +17,10 @@
                 <Route exact path="/" element={<Home />}></Route>
                 <Route path="/sign-in" element={<SignIn />}></Route>
                 <Route path="/sign-up" element={<SignUp />}></Route>
-                <Route path="/user/:name" element={<UserProfile />}></Route>
-                <Route path="/edit-profile/:name" element={<EditProfile />}></Route>
+                <Route path="/user" element={<UserProfile />}></Route>
+                <Route path="/edit-profile" element={<EditProfile />}></Route>
             </Routes>
+            <Footer />
         </BrowserRouter>
 
       )

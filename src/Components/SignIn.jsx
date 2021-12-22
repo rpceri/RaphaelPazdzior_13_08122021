@@ -5,7 +5,7 @@ import { LoginUser } from './actions.js';
 import { useNavigate } from "react-router-dom";
 function SignIn() {
 
-  const navigate = useNavigate(); // utile pour changer de page (utilisé dans  actsion.js(AccessProfile apelé par LoginUser))
+  const navigate = useNavigate(); // utile pour changer de page (utilisé dans  action.js (AccessProfile apelé par LoginUser))
   const dispatcOfUseDuspatch = useDispatch(); // hook,cf https://openclassrooms.com/fr/courses/7150626-utilisez-le-state-manager-redux-pour-gerer-l-etat-de-vos-applications/7286799-appliquez-redux-dans-une-app-react
 
   const status = useSelector(state => state.loginReducer.status); //pour savoir si le status est != 200
