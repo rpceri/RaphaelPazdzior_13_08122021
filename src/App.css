@@ -11,6 +11,34 @@
   margin-top: 0.2rem;
   margin-left: 0.2rem;
 }
+
+
+/*ajout pour edit profile */
+.input-edit {
+  display: flex;
+  text-align: left;
+  margin-bottom: 1rem;
+ 
+ justify-content:center;
+}
+
+.input-edit input {
+  width: 250px;
+  margin: 10px;
+  padding: 5px;
+  font-size: 1.2rem;
+}
+.sav-button {
+   width: 200px;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  margin : auto
+}
 /* fin ajout des styles en plus */
 
 html {
