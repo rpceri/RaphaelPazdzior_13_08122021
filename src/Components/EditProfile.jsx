@@ -1,42 +1,40 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
+import { RecordChange } from "./actions.js";
 
 
 function EditProfile() {
-
+    const dispatchOfUseDispatch = useDispatch();
+    const navigate = useNavigate(); // utile pour changer de page
 
     const firstName = useSelector(state => state.userReducer.firstName);
     const lastName = useSelector(state => state.userReducer.lastName);
 
+    const token = useSelector(state => state.loginReducer.token);
+    //console.log(lastName)
+    const [newFirstName, setNewFirstName] = useState(firstName); // pour enregistrer les nouvelles valeurs
+    const [newLastName, setNewLastName] = useState(lastName);
 
-    const [newFirstName, setNewFirstName] = useState('');
-    const [newLastName, setNewLastName] = useState('');
+    const [inputError, setInputError] = useState('');
 
-    const [newFirstNameError, setNewFirstNameError] = useState('');
-    const [newLastNameError, setNewLastNameError] = useState('');
+    function validate () {
+        let errorMsg = '';;
+        if (!newFirstName && !newLastName) { errorMsg = 'Fist name and last name are obligatory' }
+        else if (!newFirstName) { errorMsg = 'Fist name is obligatory' }
+        else if (!newLastName) { errorMsg = 'Last name is obligatory' }
 
-    const validate = () => {
-
-        let newFisrtNameErrorMessage = '';
-        let newLastNameErrorMessage = '';
-
-        if (!newFirstName) { newFisrtNameErrorMessage = 'obligatory' };
-        if (!newLastName) { newLastNameErrorMessage = 'obligatoryy' };
-
-        if (newFisrtNameErrorMessage || newLastNameErrorMessage) {
-            setNewFirstNameError(newFisrtNameErrorMessage);
-            setNewLastNameError(newLastNameErrorMessage);
+        if (errorMsg) {
+            setInputError(errorMsg);
             return false;
         }
-
         return true;
-    };
+    }
    
     const handleSubmit = (event) => {
         event.preventDefault();
-        const isFormValid = validate();
-        //if(isFormValid) dispatch(modifyName(token, newFirstName, newLastName));
+        if(validate()) dispatchOfUseDispatch(RecordChange(token, newFirstName, newLastName, navigate));
     }
 
     return (
@@ -51,22 +49,20 @@ function EditProfile() {
                             name="firstName"
                             type="text"
                             id="firstName"
-                            value={firstName}
+                            value={newFirstName}
                             onChange={(event) => setNewFirstName(event.target.value)}
                         />
-                        { newFirstNameError ? <div className="form-error">{newFirstNameError}</div> : null  }  
-
                         <input
                             placeholder="Last Name"
                             name="lastName"
                             type="text"
                             id="lastName"
-                            value={lastName}
+                            value={newLastName}
                             onChange={(event) => setNewLastName(event.target.value)}
-                        />
-                        { newLastNameError ? <div className="form-error">{newLastNameError}</div> : null  }  
+                        />                        
                     </div>
-                    <button className="sav-button" type="submit">Save</button>
+                    { inputError ? <div className="form-error2">{inputError}</div> : null  }  
+                    <button className="sav-button" type="submit">Save </button>
                 </form>
                 </div>
             </main>

@@ -31,6 +31,15 @@ const userReducer = (state = {status: '' , email: '', firstName: '', lastName: '
             lastName: action.payload.data.lastName 
         }
     }
+    else if(action.type === 'RESET_DATA') {
+        alert('RESET_DATA')
+        return state = {
+        status: null,
+        email: null,
+        firstName: null,
+        lastName: null 
+        }
+    }
     else {
             //alert('ACTION INCONNUE')
             return state
@@ -58,8 +67,8 @@ const loginReducer = (state = {token: '', status: '', message: ''}, action) => {
             message: action.payload.message
         }
     }
-    else if(action.type === 'LOGIN_FAILURE') {
-        alert('LOGIN_FAILURE')
+    else if(action.type === 'API_FAILURE') {
+        alert('API_FAILURE')
         return state = {
         token: null,
         status: action.payload.status,

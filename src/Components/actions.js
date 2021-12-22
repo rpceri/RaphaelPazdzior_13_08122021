@@ -1,4 +1,4 @@
-export const loginUserTTT = (username, password) => ({
+export const LoginUserTTT = (username, password) => ({
     type: "pointScored"
 })
 
@@ -23,17 +23,17 @@ export const LoginUser = (username, password, navigate) => {
                     dispatch(loginSuccess(data.body.token, data.status, data.message));
                     dispatch(AccessProfile(data.body.token, navigate))
 
-                } catch(e) {
-                    console.log('error', e)
+                } catch(error) {
+                    console.log('error', error)
                 }
             })
             .catch(error => {
-                dispatch(loginFailure(error));
+                dispatch(apiFailure(error));
             })
     }
 }
 
-// appelée par loginUser
+// appelée par LoginUser
 export const AccessProfile = (token, navigate) => {
 
     return (dispatch) => {
@@ -52,10 +52,10 @@ export const AccessProfile = (token, navigate) => {
                     console.log('success get profile', data) // renvoie  status: 200, message: "Successfully got user profile data", enc as de succès
                     dispatch(receiveData(data.body, data.status));
                     let nouvellePage = `/user`
-                    console.log('navigat : ', nouvellePage) 
-                    navigate(nouvellePage);
-                } catch(e) {
-                    console.log('error 1', e)
+                    //console.log('navigation : ', nouvellePage) 
+                    navigate(nouvellePage)
+                } catch(error) {
+                    console.log('error 1', error)
                 }
             })
             .catch(error => {
@@ -64,7 +64,7 @@ export const AccessProfile = (token, navigate) => {
        }
 }
 
-// appelée par accessProfile, va utilisé le reducer "userReducer"
+// appelée par accessProfile et RecordChange
 export const receiveData = (data, status) => {
     return {
         type: 'RECEIVE_DATA',
@@ -75,7 +75,7 @@ export const receiveData = (data, status) => {
     }
 }
 
-// appelée par loginUser
+// appelée par LoginUser
 export const loginSuccess = (token, status, message) => {
     return {
         type: 'LOGIN_SUCCESS',
@@ -86,14 +86,54 @@ export const loginSuccess = (token, status, message) => {
         }
     }
 }
-// appelée par loginUser
-export const loginFailure = (status, message) => {
+// appelée par LoginUser et RecordChange
+export const apiFailure = (status, message) => {
     return {
-        type: 'LOGIN_FAILURE',
+        type: 'API_FAILURE',
         payload: {
             status: status,
             message: message
         }
     }
 }
+// appelée par EditProfile
+export const RecordChange = (token, newFirstName, newLastName, navigate) => {
+    return (dispatch) => {
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                "firstName": newFirstName,
+                "lastName": newLastName
+            })
+        };
+        return fetch('http://localhost:3001/api/v1/user/profile', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                try {
+                dispatch(receiveData(data.body, data.status))
+                navigate('/user') // après enregistrement, on rivien sur la fich user
+                } catch(error) {
+                    console.log('erreur put2', error);
+                    dispatch(apiFailure(error))
+                }
+            })
+            .catch(error => {
+                 console.log('erreur put', error)
+                 dispatch(resetFailure())
+                 dispatch(apiFailure(error))
+                
+                 navigate('/')
+        })
+    }
+}
 
+// appelée par RecordChange
+export const resetFailure = () => {
+    return {
+        type: 'RESET_DATA'
+    }
+}

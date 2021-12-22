@@ -14,6 +14,14 @@
 
 
 /*ajout pour edit profile */
+.form-error2 {
+  color: red;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin : auto;
+  padding-bottom: 15px;
+}
+
 .input-edit {
   display: flex;
   text-align: left;
@@ -215,10 +223,6 @@ body {
   margin: 0 auto;
   margin-top: 3rem;
   padding: 2rem;
-}
-
-.sign-in-icon {
-  /*font-size: 2rem;*/
 }
 
 .input-remember {

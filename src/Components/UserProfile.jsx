@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
 function UserProfile() {
-    const navigate = useNavigate(); // utile pour changer de page (utilisé dans  action.js (AccessProfile apelé par LoginUser))
+    const navigate = useNavigate(); // utile pour changer de page
 
     const firstName = useSelector(state => state.userReducer.firstName);
     const lastName = useSelector(state => state.userReducer.lastName);
-    console.log(`id : ${lastName}`)
+    //console.log(`id : ${lastName}`)
     const id = useSelector(state => state.userReducer.id);
 
 
@@ -15,12 +15,12 @@ function UserProfile() {
          document.title = `Argent Bank - ${firstName} ${lastName}`;  
     }, [firstName, lastName]); 
 
-    // lors de la modificaiton du nom
+    // lors de la modification du nom
     const handleClickEditName = (event) => {
         event.preventDefault();
         navigate('/edit-profile')
     }
-    console.log(`id : ${lastName}`)
+    //console.log(`id : ${lastName}`)
     if (!id) {
         //navigate(`/`)
         //return <Home />

@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+
 import { LoginUser } from './actions.js';
 
-import { useNavigate } from "react-router-dom";
+
 function SignIn() {
 
   const navigate = useNavigate(); // utile pour changer de page (utilisé dans  action.js (AccessProfile apelé par LoginUser))
-  const dispatcOfUseDuspatch = useDispatch(); // hook,cf https://openclassrooms.com/fr/courses/7150626-utilisez-le-state-manager-redux-pour-gerer-l-etat-de-vos-applications/7286799-appliquez-redux-dans-une-app-react
+  const dispatchOfUseDispatch = useDispatch(); // hook,cf https://openclassrooms.com/fr/courses/7150626-utilisez-le-state-manager-redux-pour-gerer-l-etat-de-vos-applications/7286799-appliquez-redux-dans-une-app-react
 
   const status = useSelector(state => state.loginReducer.status); //pour savoir si le status est != 200
   const message = useSelector(state => state.loginReducer.message);  // si status = 400 on aura le message "Error: Password is invalid
@@ -35,7 +37,7 @@ function SignIn() {
   // lors de la soumision du formulaire
   const handleSubmit = (event) => {
     event.preventDefault() // On utilise la fonction preventDefault de notre objet event pour empêcher le comportement par défaut de cet élément lors du clic de la souris
-    if (validate()) dispatcOfUseDuspatch(LoginUser(email, password, navigate)) // On envoie l'action avec dispatch si le formulaire est bien renseigné
+    if (validate()) dispatchOfUseDispatch(LoginUser(email, password, navigate)) // On envoie l'action avec dispatch si le formulaire est bien renseigné
     //navigate('/user/61b863bd8f866272308fcab6')
   };
     
