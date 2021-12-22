@@ -32,7 +32,8 @@ const userReducer = (state = {status: '' , email: '', firstName: '', lastName: '
         }
     }
     else if(action.type === 'RESET_DATA') {
-        alert('RESET_DATA')
+        //alert('RESET_DATA')
+        console.log('action RESET_DATA')
         return state = {
         status: null,
         email: null,
@@ -41,8 +42,8 @@ const userReducer = (state = {status: '' , email: '', firstName: '', lastName: '
         }
     }
     else {
-            //alert('ACTION INCONNUE')
-            return state
+        //alert('ACTION INCONNUE')
+        return state
     }
     
 }
@@ -74,6 +75,10 @@ const loginReducer = (state = {token: '', status: '', message: ''}, action) => {
         status: action.payload.status,
         message: action.payload.message
         }
+    }
+    // reset redux state if logout
+    else if (action.type === 'USER_LOGGED_OUT') {
+        state = undefined;
     }
     else {
        // alert('ACTION INCONNUE')

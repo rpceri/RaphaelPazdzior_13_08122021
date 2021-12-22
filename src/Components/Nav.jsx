@@ -1,16 +1,19 @@
-
 import { NavLink } from "react-router-dom";
-import { useSelector } from 'react-redux'; //useDispatch
+import { useSelector, useDispatch } from 'react-redux';
 
+import { LogoutRequest } from './actions.js';
 
 function Nav() {
-    //const dispatch = useDispatch(); //  utilisé grace au <Provider>, custom hooks  pour récupérer la fonction dispatch de redux (retourne la fonction dispatch  de notre store Redux.)
-                                    // pour envoyer des actions depuis les composants.
+    const dispatchOfUseDispatch = useDispatch(); 
 
     const status = useSelector(state => state.userReducer.status); // utilisé grace au <Provider>,  custom hooks,  qui recoit le state en argument et doit retourner une partie de ce state.
                                                                    // pour extraire des morceaux de state et mettre à jour le composant en cas de changement de state.
-    const user = useSelector(state => state.userReducer.firstName);
-       
+    const user = useSelector(state => `${state.userReducer.firstName} ${state.userReducer.lastName}`);   
+
+    const handleLogOut = () => {
+        dispatchOfUseDispatch(LogoutRequest());   
+    }
+
     return (
     <>
         <nav className="main-nav">
@@ -22,11 +25,21 @@ function Nav() {
                 />
                 <h1 className="sr-only">Argent Bank</h1>
             </NavLink>
+
             <div className="main-nav-link">
                 <NavLink className="main-nav-item" to={status === 200 ? `/user` : '/sign-in'}>
-                <i className="fa fa-user-circle"></i> Sign In
+                <i className="fa fa-user-circle"></i> {status === 200 ? user : 'Sign In'}
                 </NavLink>
-            
+
+                {status === 200 ? <NavLink className="main-nav-item" to="/" onClick={handleLogOut}>
+                                    <i className="fa fa-sign-out"></i>
+                                    Sign Out
+                </NavLink> : ''}
+
+                {status !== 200 ? <NavLink className="main-nav-item" to="/sign-up">
+                                    <i className="fa fa-sign-in"></i>
+                                    Sign Up
+                </NavLink> : ''}
             </div>
         </nav>
     </>

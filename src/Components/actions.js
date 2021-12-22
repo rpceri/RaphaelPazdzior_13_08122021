@@ -137,3 +137,12 @@ export const resetFailure = () => {
         type: 'RESET_DATA'
     }
 }
+
+
+
+
+export const LogoutRequest = () => {
+    return {
+        type: 'USER_LOGGED_OUT'
+    }
+}

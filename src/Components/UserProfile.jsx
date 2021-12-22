@@ -1,19 +1,28 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+
+import { resetFailure } from './actions.js';
 
 function UserProfile() {
     const navigate = useNavigate(); // utile pour changer de page
+    const dispatchOfUseDispatch = useDispatch(); 
 
     const firstName = useSelector(state => state.userReducer.firstName);
     const lastName = useSelector(state => state.userReducer.lastName);
     //console.log(`id : ${lastName}`)
-    const id = useSelector(state => state.userReducer.id);
+    const status = useSelector(state => state.userReducer.status);
 
 
      useEffect(() => {
-         document.title = `Argent Bank - ${firstName} ${lastName}`;  
-    }, [firstName, lastName]); 
+         document.title = `Argent Bank - ${firstName} ${lastName}`; 
+
+         if (!status) { // si le status 'nest pas bon on redirige sur l'accieuil
+            dispatchOfUseDispatch(resetFailure())
+            navigate(`/`)  //!!!!!!!!!!!!! si pas dans le useEffect : You should call navigate() in a React.useEffect(), not when your component is first rendered.
+            console.log('oupppps')
+        } 
+    }, [firstName, lastName, status, dispatchOfUseDispatch, navigate]); 
 
     // lors de la modification du nom
     const handleClickEditName = (event) => {
@@ -21,11 +30,8 @@ function UserProfile() {
         navigate('/edit-profile')
     }
     //console.log(`id : ${lastName}`)
-    if (!id) {
-        //navigate(`/`)
-        //return <Home />
-    } 
-  
+
+
     return (
         <>
             <main className="main bg-dark">

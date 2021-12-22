@@ -8,7 +8,9 @@ import { LoginUser } from './actions.js';
 function SignIn() {
 
   const navigate = useNavigate(); // utile pour changer de page (utilisé dans  action.js (AccessProfile apelé par LoginUser))
-  const dispatchOfUseDispatch = useDispatch(); // hook,cf https://openclassrooms.com/fr/courses/7150626-utilisez-le-state-manager-redux-pour-gerer-l-etat-de-vos-applications/7286799-appliquez-redux-dans-une-app-react
+  const dispatchOfUseDispatch = useDispatch(); // custom hook,cf https://openclassrooms.com/fr/courses/7150626-utilisez-le-state-manager-redux-pour-gerer-l-etat-de-vos-applications/7286799-appliquez-redux-dans-une-app-react
+  //utilisé grace au <Provider>, pour récupérer la fonction dispatch de redux (retourne la fonction dispatch  de notre store Redux.)
+  // pour envoyer des actions depuis les composants.
 
   const status = useSelector(state => state.loginReducer.status); //pour savoir si le status est != 200
   const message = useSelector(state => state.loginReducer.message);  // si status = 400 on aura le message "Error: Password is invalid
