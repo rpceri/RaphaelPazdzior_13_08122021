@@ -2,9 +2,6 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser } from './actions.js';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
-
 
 function SignIn() {
 
@@ -48,12 +45,11 @@ function SignIn() {
         <>
             <main className="main bg-dark">
               <section className="sign-in-content">
-                { /* <i className="fa fa-user-circle sign-in-icon"></i> */ }
-                <FontAwesomeIcon icon={solid('user-circle')} />
+                <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
                 <form onSubmit={handleSubmit}> { /*ajout d'un onsubmit pour soumission formulaire */}
                     <div className="input-wrapper">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">Username (Email)</label>
                         <input type="email" id="email" value={email} onChange={(event) => setEmail(event.target.value)} /> { /* remplace nom id et ajout onchange + htmlFor */}
                     </div>
                     <div className="input-wrapper">
@@ -68,7 +64,7 @@ function SignIn() {
                     </div>
                     <button className="sign-in-button" type="submit">Sign In</button>
                 </form>
-                {status && status !== 200 ? <h3 className="error-login">{message}</h3> : null }
+                {status  ? <h3 className="error-login">{message}</h3> : null }
               </section>
             </main>
     </>

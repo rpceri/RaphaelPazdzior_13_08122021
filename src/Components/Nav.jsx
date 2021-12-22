@@ -2,8 +2,6 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from 'react-redux'; //useDispatch
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { solid } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 
 function Nav() {
     //const dispatch = useDispatch(); //  utilisé grace au <Provider>, custom hooks  pour récupérer la fonction dispatch de redux (retourne la fonction dispatch  de notre store Redux.)
@@ -26,8 +24,7 @@ function Nav() {
             </NavLink>
             <div className="main-nav-link">
                 <NavLink className="main-nav-item" to={status === 200 ? `/user/${user}` : '/sign-in'}>
-                    { /* <i className="fa fa-user-circle"></i> */ }
-                <FontAwesomeIcon icon={solid('user-circle')} /> Sign In
+                <i className="fa fa-user-circle"></i> Sign In
                 </NavLink>
             
             </div>

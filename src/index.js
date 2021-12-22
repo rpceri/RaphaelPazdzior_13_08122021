@@ -22,3 +22,10 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+const link = document.createElement("link");
+link.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+link.type = "text/css";
+link.rel = "stylesheet";
+
+document.getElementsByTagName("head")[0].appendChild(link);
