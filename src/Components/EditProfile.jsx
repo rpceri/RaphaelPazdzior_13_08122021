@@ -9,10 +9,10 @@ function EditProfile() {
     const dispatchOfUseDispatch = useDispatch();
     const navigate = useNavigate(); // utile pour changer de page
 
-    const firstName = useSelector(state => state.userReducer.firstName);
-    const lastName = useSelector(state => state.userReducer.lastName);
+    const firstName = useSelector(state => state.firstName);
+    const lastName = useSelector(state => state.lastName);
 
-    const token = useSelector(state => state.loginReducer.token);
+    const token = useSelector(state => state.token);
     //console.log(lastName)
     const [newFirstName, setNewFirstName] = useState(firstName); // pour enregistrer les nouvelles valeurs
     const [newLastName, setNewLastName] = useState(lastName);

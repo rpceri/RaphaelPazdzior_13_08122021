@@ -6,9 +6,9 @@ import { LogoutRequest } from './actions.js';
 function Nav() {
     const dispatchOfUseDispatch = useDispatch(); 
 
-    const status = useSelector(state => state.userReducer.status); // utilisé grace au <Provider>,  custom hooks,  qui recoit le state en argument et doit retourner une partie de ce state.
+    const status = useSelector(state => state.status); // utilisé grace au <Provider>,  custom hooks,  qui recoit le state en argument et doit retourner une partie de ce state.
                                                                    // pour extraire des morceaux de state et mettre à jour le composant en cas de changement de state.
-    const user = useSelector(state => `${state.userReducer.firstName} ${state.userReducer.lastName}`);   
+    const user = useSelector(state => `${state.firstName} ${state.lastName}`);   
 
     const handleLogOut = () => {
         dispatchOfUseDispatch(LogoutRequest());   

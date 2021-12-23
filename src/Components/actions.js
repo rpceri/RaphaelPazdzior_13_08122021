@@ -50,7 +50,7 @@ export const AccessProfile = (token, navigate) => {
             .then(data => {
                 try {
                     console.log('success get profile', data) // renvoie  status: 200, message: "Successfully got user profile data", enc as de succès
-                    dispatch(receiveData(data.body, data.status));
+                    dispatch(receiveData(data.body, data.status, token));
                     let nouvellePage = `/user`
                     //console.log('navigation : ', nouvellePage) 
                     navigate(nouvellePage)
@@ -65,12 +65,13 @@ export const AccessProfile = (token, navigate) => {
 }
 
 // appelée par accessProfile et RecordChange
-export const receiveData = (data, status) => {
+export const receiveData = (data, status, token) => {
     return {
         type: 'RECEIVE_DATA',
         payload: {
             data: data,
-            status: status
+            status: status,
+            token: token
         }
     }
 }
@@ -114,7 +115,7 @@ export const RecordChange = (token, newFirstName, newLastName, navigate) => {
             .then(response => response.json())
             .then(data => {
                 try {
-                dispatch(receiveData(data.body, data.status))
+                dispatch(receiveData(data.body, data.status, token))
                 navigate('/user') // après enregistrement, on rivien sur la fich user
                 } catch(error) {
                     console.log('erreur put2', error);

@@ -8,10 +8,10 @@ function UserProfile() {
     const navigate = useNavigate(); // utile pour changer de page
     const dispatchOfUseDispatch = useDispatch(); 
 
-    const firstName = useSelector(state => state.userReducer.firstName);
-    const lastName = useSelector(state => state.userReducer.lastName);
+    const firstName = useSelector(state => state.firstName);
+    const lastName = useSelector(state => state.lastName);
     //console.log(`id : ${lastName}`)
-    const status = useSelector(state => state.userReducer.status);
+    const status = useSelector(state => state.status);
 
 
      useEffect(() => {

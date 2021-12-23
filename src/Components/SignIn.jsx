@@ -12,8 +12,8 @@ function SignIn() {
   //utilisé grace au <Provider>, pour récupérer la fonction dispatch de redux (retourne la fonction dispatch  de notre store Redux.)
   // pour envoyer des actions depuis les composants.
 
-  const status = useSelector(state => state.loginReducer.status); //pour savoir si le status est != 200
-  const message = useSelector(state => state.loginReducer.message);  // si status = 400 on aura le message "Error: Password is invalid
+  const status = useSelector(state => state.status); //pour savoir si le status est != 200
+  const message = useSelector(state => state.message);  // si status = 400 on aura le message "Error: Password is invalid
 
   const [email, setEmail] = useState('steve@rogers.com');
   const [password, setPassword] = useState('password456');
