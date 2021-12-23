@@ -59,10 +59,6 @@ const reducer = (state = {status: '' , email: '', firstName: '', lastName: '', t
         }
     }
 
-    else if(action.type === 'pointScored') {
-        alert('test')
-        return state
-    }
 
 
     else if(action.type === 'LOGIN_SUCCESS') {
@@ -97,10 +93,6 @@ const reducer = (state = {status: '' , email: '', firstName: '', lastName: '', t
 
 /*
 const loginReducer = (state = {token: '', status: '', message: ''}, action) => { // utilisé dans Signin dans un useSelector
-    if(action.type === 'pointScored') {
-        alert('test')
-        return state
-    }
     else if(action.type === 'LOGIN_SUCCESS') {
         //alert('LOGIN_SUCCESS')
         return state = {

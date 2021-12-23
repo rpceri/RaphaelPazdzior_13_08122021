@@ -2,9 +2,16 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
-import { LoginUser } from './actions.js';
+import { LoginUser } from '../actions.js';
 
-
+/**
+ * Return template with Sign in form
+ *
+ * @component
+ * @summary imported in Route
+ * @param {  }
+ * @return { HTMLElement }
+*/
 function SignIn() {
 
   const navigate = useNavigate(); // utile pour changer de page (utilisé dans  action.js (AccessProfile apelé par LoginUser))
@@ -48,7 +55,6 @@ function SignIn() {
     }, []); 
   
     return (
-        <>
             <main className="main bg-dark">
               <section className="sign-in-content">
                 <i className="fa fa-user-circle sign-in-icon"></i>
@@ -73,7 +79,6 @@ function SignIn() {
                 {status  ? <h3 className="error-login">{message}</h3> : null }
               </section>
             </main>
-    </>
     )
 }
 

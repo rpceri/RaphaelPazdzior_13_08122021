@@ -2,8 +2,17 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
-import { resetFailure } from './actions.js';
+import { resetFailure } from '../actions.js';
+ 
 
+/**
+ * Return template with userName
+ *
+ * @component
+ * @summary imported in Route
+ * @param {  }
+ * @return { HTMLElement }
+*/
 function UserProfile() {
     const navigate = useNavigate(); // utile pour changer de page
     const dispatchOfUseDispatch = useDispatch(); 
@@ -17,10 +26,10 @@ function UserProfile() {
      useEffect(() => {
          document.title = `Argent Bank - ${firstName} ${lastName}`; 
 
-         if (!status) { // si le status 'nest pas bon on redirige sur l'accieuil
+         if (!status) { // si le status n(est pas bon on redirige sur l'accieuil
             dispatchOfUseDispatch(resetFailure())
             navigate(`/`)  //!!!!!!!!!!!!! si pas dans le useEffect : You should call navigate() in a React.useEffect(), not when your component is first rendered.
-            console.log('oupppps')
+            console.log('oupppps status no good')
         } 
     }, [firstName, lastName, status, dispatchOfUseDispatch, navigate]); 
 
@@ -33,7 +42,6 @@ function UserProfile() {
 
 
     return (
-        <>
             <main className="main bg-dark">
                 <div className="header">
                     <h1>Welcome back<br /> {firstName} {lastName} !</h1>
@@ -70,9 +78,7 @@ function UserProfile() {
                     <button className="transaction-button">View transactions</button>
                     </div>
                 </section>
-            </main>
-        </>
-        
+            </main>       
     )
 }
 

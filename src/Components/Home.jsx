@@ -1,5 +1,13 @@
 import { useEffect } from 'react';
 
+/**
+ * Return template of home page
+ *
+ * @component
+ * @summary imported in Route
+ * @param {  }
+ * @return { HTMLElement }
+*/
 function Home() {
   
   useEffect(() => {
@@ -7,7 +15,6 @@ function Home() {
   }, []);
   
     return (
-<>
     <main>
       <div className="hero">
         <section className="hero-content">
@@ -53,7 +60,6 @@ function Home() {
         </div>
       </section>
     </main>
-</>
     )
 }
 

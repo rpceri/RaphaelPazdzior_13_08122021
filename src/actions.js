@@ -1,8 +1,4 @@
-export const LoginUserTTT = (username, password) => ({
-    type: "pointScored"
-})
-
-
+//called in SignIn Page :  call api to log in, and api to GET profile, record all datats in the store
 export const LoginUser = (username, password, navigate) => {
 
     //alert (username + ' , ' + password)
@@ -15,13 +11,13 @@ export const LoginUser = (username, password, navigate) => {
                 "password": password
             })
         };
-        return fetch('http://localhost:3001/api/v1/user/login', requestOptions)
+        return fetch('http://localhost:3001/api/v1/user/login', requestOptions) // call api to log in
             .then(response => response.json())
             .then(data => {
                 try {
                     console.log('success sign in', data)
-                    dispatch(loginSuccess(data.body.token, data.status, data.message));
-                    dispatch(AccessProfile(data.body.token, navigate))
+                    dispatch(loginSuccess(data.body.token, data.status, data.message)); // record token and other...
+                    dispatch(AccessProfile(data.body.token, navigate)) // call api to GET profile and record datas (body, status, en token)
 
                 } catch(error) {
                     console.log('error', error)
@@ -33,7 +29,7 @@ export const LoginUser = (username, password, navigate) => {
     }
 }
 
-// appelée par LoginUser
+// called by LoginUser, call api to GET profile and record datas (body, status, en token)
 export const AccessProfile = (token, navigate) => {
 
     return (dispatch) => {
@@ -49,7 +45,7 @@ export const AccessProfile = (token, navigate) => {
             .then(response => response.json())
             .then(data => {
                 try {
-                    console.log('success get profile', data) // renvoie  status: 200, message: "Successfully got user profile data", enc as de succès
+                    console.log('success get profile', data) // return status: 200, message: "Successfully got user profile data",in case of success
                     dispatch(receiveData(data.body, data.status, token));
                     let nouvellePage = `/user`
                     //console.log('navigation : ', nouvellePage) 
@@ -64,7 +60,7 @@ export const AccessProfile = (token, navigate) => {
        }
 }
 
-// appelée par accessProfile et RecordChange
+// called by accessProfile and RecordChange to record datas
 export const receiveData = (data, status, token) => {
     return {
         type: 'RECEIVE_DATA',
@@ -76,7 +72,7 @@ export const receiveData = (data, status, token) => {
     }
 }
 
-// appelée par LoginUser
+// called by LoginUser to record datas (token)
 export const loginSuccess = (token, status, message) => {
     return {
         type: 'LOGIN_SUCCESS',
@@ -87,7 +83,8 @@ export const loginSuccess = (token, status, message) => {
         }
     }
 }
-// appelée par LoginUser et RecordChange
+
+// called by LoginUser and RecordChange when a problem gone
 export const apiFailure = (status, message) => {
     return {
         type: 'API_FAILURE',
@@ -97,7 +94,8 @@ export const apiFailure = (status, message) => {
         }
     }
 }
-// appelée par EditProfile
+
+// called by EditProfile page to use PUT API to store datas to update
 export const RecordChange = (token, newFirstName, newLastName, navigate) => {
     return (dispatch) => {
         const requestOptions = {
@@ -116,7 +114,7 @@ export const RecordChange = (token, newFirstName, newLastName, navigate) => {
             .then(data => {
                 try {
                 dispatch(receiveData(data.body, data.status, token))
-                navigate('/user') // après enregistrement, on rivien sur la fich user
+                navigate('/user') // after recorded, we go back to user profile
                 } catch(error) {
                     console.log('erreur put2', error);
                     dispatch(apiFailure(error))
@@ -132,7 +130,7 @@ export const RecordChange = (token, newFirstName, newLastName, navigate) => {
     }
 }
 
-// appelée par RecordChange
+//called by RecordChange  when a problem gone
 export const resetFailure = () => {
     return {
         type: 'RESET_DATA'
@@ -140,8 +138,7 @@ export const resetFailure = () => {
 }
 
 
-
-
+//called in Nav to Log out, to erase token
 export const LogoutRequest = () => {
     return {
         type: 'USER_LOGGED_OUT'

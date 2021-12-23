@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'; // C’est grâce au Provider que useDis
 import configureStore from './configureStore.js'; // utile pour provider
 
 const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // https://openclassrooms.com/fr/courses/7150626-utilisez-le-state-manager-redux-pour-gerer-l-etat-de-vos-applications/7286859-tirez-profit-des-redux-devtools
-const store = configureStore(reduxDevtools); // remplace createStore et combineReducers, et connecte le store aux Devtools automatiquement
+const store = configureStore(reduxDevtools); // reduxDevtools = connecte le store aux Devtools automatiquement
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,6 +23,7 @@ ReactDOM.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 
+// to add header lien to font-awsome :
 const link = document.createElement("link");
 link.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
 link.type = "text/css";

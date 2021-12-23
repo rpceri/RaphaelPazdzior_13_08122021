@@ -2,9 +2,16 @@ import { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
-import { RecordChange } from "./actions.js";
+import { RecordChange } from "../actions.js";
 
-
+/**
+ * Return template of form to edit profile (update first or lastname)
+ *
+ * @component
+ * @summary imported in Route
+ * @param {  }
+ * @return { HTMLElement }
+*/
 function EditProfile() {
     const dispatchOfUseDispatch = useDispatch();
     const navigate = useNavigate(); // utile pour changer de page
@@ -38,7 +45,6 @@ function EditProfile() {
     }
 
     return (
-        <>
             <main className="main bg-dark">
                 <div className="header">
                     <h1>Welcome back<br /></h1>
@@ -66,7 +72,6 @@ function EditProfile() {
                 </form>
                 </div>
             </main>
-            </>
         )
 }
 

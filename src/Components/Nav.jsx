@@ -1,8 +1,14 @@
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
-import { LogoutRequest } from './actions.js';
-
+import { LogoutRequest } from '../actions.js';
+ 
+/**
+ * Component for top navigation.
+ *
+ * @component
+ * @return { HTMLElement }
+ */
 function Nav() {
     const dispatchOfUseDispatch = useDispatch(); 
 
@@ -34,11 +40,6 @@ function Nav() {
                 {status === 200 ? <NavLink className="main-nav-item" to="/" onClick={handleLogOut}>
                                     <i className="fa fa-sign-out"></i>
                                     Sign Out
-                </NavLink> : ''}
-
-                {status !== 200 ? <NavLink className="main-nav-item" to="/sign-up">
-                                    <i className="fa fa-sign-in"></i>
-                                    Sign Up
                 </NavLink> : ''}
             </div>
         </nav>

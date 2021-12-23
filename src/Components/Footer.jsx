@@ -1,3 +1,9 @@
+ /**
+ * Component for footer
+ *
+ * @component
+ * @return { HTMLElement }
+ */
 function Footer() {
     return (
         <footer className="footer">

@@ -3,7 +3,6 @@
   
   import Home from "./Components/Home.jsx";
   import SignIn from "./Components/SignIn.jsx";
-  import SignUp from "./Components/SignUp.jsx";
   import UserProfile from "./Components/UserProfile.jsx";
   import EditProfile from "./Components/EditProfile.jsx";
 
@@ -16,7 +15,6 @@
             <Routes>
                 <Route exact path="/" element={<Home />}></Route>
                 <Route path="/sign-in" element={<SignIn />}></Route>
-                <Route path="/sign-up" element={<SignUp />}></Route>
                 <Route path="/user" element={<UserProfile />}></Route>
                 <Route path="/edit-profile" element={<EditProfile />}></Route>
             </Routes>
