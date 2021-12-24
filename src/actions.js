@@ -2,7 +2,7 @@
 export const LoginUser = (username, password, navigate) => {
 
     //alert (username + ' , ' + password)
-    return (dispatch) => {
+    return async (dispatch) => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -11,28 +11,28 @@ export const LoginUser = (username, password, navigate) => {
                 "password": password
             })
         };
-        return fetch('http://localhost:3001/api/v1/user/login', requestOptions) // call api to log in
-            .then(response => response.json())
-            .then(data => {
-                try {
-                    console.log('success sign in', data)
-                    dispatch(loginSuccess(data.body.token, data.status, data.message)); // record token and other...
-                    dispatch(AccessProfile(data.body.token, navigate)) // call api to GET profile and record datas (body, status, en token)
+        try {
+            const response = await fetch('http://localhost:3001/api/v1/user/login', requestOptions) // call api to log in
+                ;
+            const data = await response.json();
+            try {
+                console.log('success sign in', data);
+                dispatch(loginSuccess(data.body.token, data.status, data.message)); // record token and other...
+                dispatch(AccessProfile(data.body.token, navigate)); // call api to GET profile and record datas (body, status, en token)
 
-                } catch(error) {
-                    console.log('error', error)
-                }
-            })
-            .catch(error => {
-                dispatch(apiFailure(error));
-            })
+            } catch (error) {
+                console.log('error', error);
+            }
+        } catch (error_1) {
+            dispatch(apiFailure(error_1));
+        }
     }
 }
 
 // called by LoginUser, call api to GET profile and record datas (body, status, en token)
 export const AccessProfile = (token, navigate) => {
 
-    return (dispatch) => {
+    return async (dispatch) => {
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -41,22 +41,21 @@ export const AccessProfile = (token, navigate) => {
             },
         };
         //console.log('appel http://localhost:3001/api/v1/user/profile')
-        return fetch('http://localhost:3001/api/v1/user/profile', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                try {
-                    console.log('success get profile', data) // return status: 200, message: "Successfully got user profile data",in case of success
-                    dispatch(receiveData(data.body, data.status, token));
-                    let nouvellePage = `/user`
-                    //console.log('navigation : ', nouvellePage) 
-                    navigate(nouvellePage)
-                } catch(error) {
-                    console.log('error 1', error)
-                }
-            })
-            .catch(error => {
-                console.log('error 2', error)
-            })
+        try {
+            const response = await fetch('http://localhost:3001/api/v1/user/profile', requestOptions);
+            const data = await response.json();
+            try {
+                console.log('success get profile', data); // return status: 200, message: "Successfully got user profile data",in case of success
+                dispatch(receiveData(data.body, data.status, token));
+                let nouvellePage = `/user`;
+                //console.log('navigation : ', nouvellePage) 
+                navigate(nouvellePage);
+            } catch (error) {
+                console.log('error 1', error);
+            }
+        } catch (error_1) {
+            console.log('error 2', error_1);
+        }
        }
 }
 
@@ -97,7 +96,7 @@ export const apiFailure = (status, message) => {
 
 // called by EditProfile page to use PUT API to store datas to update
 export const RecordChange = (token, newFirstName, newLastName, navigate) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         const requestOptions = {
             method: 'PUT',
             headers: {
@@ -109,24 +108,23 @@ export const RecordChange = (token, newFirstName, newLastName, navigate) => {
                 "lastName": newLastName
             })
         };
-        return fetch('http://localhost:3001/api/v1/user/profile', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                try {
-                dispatch(receiveData(data.body, data.status, token))
-                navigate('/user') // after recorded, we go back to user profile
-                } catch(error) {
-                    console.log('erreur put2', error);
-                    dispatch(apiFailure(error))
-                }
-            })
-            .catch(error => {
-                 console.log('erreur put', error)
-                 dispatch(resetFailure())
-                 dispatch(apiFailure(error))
-                
-                 navigate('/')
-        })
+        try {
+            const response = await fetch('http://localhost:3001/api/v1/user/profile', requestOptions);
+            const data = await response.json();
+            try {
+                dispatch(receiveData(data.body, data.status, token));
+                navigate('/user'); // after recorded, we go back to user profile
+            } catch (error) {
+                console.log('erreur put2', error);
+                dispatch(apiFailure(error));
+            }
+        } catch (error_1) {
+            console.log('erreur put', error_1);
+            dispatch(resetFailure());
+            dispatch(apiFailure(error_1));
+
+            navigate('/');
+        }
     }
 }
 
