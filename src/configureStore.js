@@ -1,8 +1,15 @@
-import {applyMiddleware, createStore } from 'redux';
+import {applyMiddleware, createStore, compose } from 'redux';
 import thunk from "redux-thunk" 
 
-export default function configureStore(initialState) {
-    const store = createStore(reducer, applyMiddleware(thunk)); // on crée le store avec le reducer et le state 
+
+
+export default function configureStore() {
+
+    const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // https://openclassrooms.com/fr/courses/7150626-utilisez-le-state-manager-redux-pour-gerer-l-etat-de-vos-applications/7286859-tirez-profit-des-redux-devtools
+    const createStoreWithMiddleware = compose(applyMiddleware(thunk), reduxDevtools)(createStore);
+    const store = createStoreWithMiddleware(reducer);    //permet d'ajouter reduxDevTools, Source: https://prograide.com/pregunta/70298/sur-react-router-comment-garder-letat-de-connexion-mme-en-rafrachissant-la-page
+ 
+    //const store = createStore(reducer,  applyMiddleware(thunk)); // on crée le store avec le reducer et le state 
     return store;
 }
 
@@ -86,7 +93,7 @@ const reducer = (state = {status: '' , email: '', firstName: '', lastName: '', t
  
     else {
         //alert('ACTION INCONNUE')
-        return state
+        return {...state}
     }
     
 }

@@ -6,8 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'; // C’est grâce au Provider que useDispatch et useSelector auront accès au store. il doit englober toute l'app et attend une prop store store Redux
 import configureStore from './configureStore.js'; // utile pour provider
 
-const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // https://openclassrooms.com/fr/courses/7150626-utilisez-le-state-manager-redux-pour-gerer-l-etat-de-vos-applications/7286859-tirez-profit-des-redux-devtools
-const store = configureStore(reduxDevtools); // reduxDevtools = connecte le store aux Devtools automatiquement
+
+const store = configureStore(); // reduxDevtools = connecte le store aux Devtools automatiquement
 
 ReactDOM.render(
   <React.StrictMode>
