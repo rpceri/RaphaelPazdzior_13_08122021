@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'; // C’est grâce au Provider que useDis
 import configureStore from './configureStore.js'; // utile pour provider
 
 
-const store = configureStore(); // reduxDevtools = connecte le store aux Devtools automatiquement
+const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>

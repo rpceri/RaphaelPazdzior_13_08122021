@@ -58,7 +58,7 @@ const reducer = (state = {status: '' , email: '', firstName: '', lastName: '', t
             message: action.payload.message
         }
     }
-    else if(action.type === 'RESET_DATA') {
+    if(action.type === 'RESET_DATA') {
         //alert('RESET_DATA')
         console.log('action RESET_DATA')
         return state = {
@@ -66,9 +66,7 @@ const reducer = (state = {status: '' , email: '', firstName: '', lastName: '', t
         }
     }
 
-
-
-    else if(action.type === 'LOGIN_SUCCESS') {
+    if(action.type === 'LOGIN_SUCCESS') {
         //alert('LOGIN_SUCCESS')
         return state = {
             token: action.payload.token,
@@ -76,7 +74,7 @@ const reducer = (state = {status: '' , email: '', firstName: '', lastName: '', t
             message: action.payload.message
         }
     }
-    else if(action.type === 'API_FAILURE') {
+    if(action.type === 'API_FAILURE') {
         alert('API_FAILURE')
         return state = {
             token: null,
@@ -85,16 +83,14 @@ const reducer = (state = {status: '' , email: '', firstName: '', lastName: '', t
         }
     }
     // reset redux state if logout
-    else if (action.type === 'USER_LOGGED_OUT') {
+     if (action.type === 'USER_LOGGED_OUT') {
         return state = {
             token: null
         }
     }
- 
-    else {
-        //alert('ACTION INCONNUE')
-        return {...state}
-    }
+    //alert('ACTION INCONNUE')
+    return state
+
     
 }
 
