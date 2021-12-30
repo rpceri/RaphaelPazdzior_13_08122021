@@ -1,15 +1,39 @@
 import {applyMiddleware, createStore, compose } from 'redux';
 import thunk from "redux-thunk" 
 
-
+// 2 fonctions to keep datas on page reload (https://dev.to/link2twenty/react-redux-and-localstorage-2lih) :
+// convert object to string and store in localStorage
+function saveToLocalStorage(state) {
+    try {
+      const serialisedState = JSON.stringify(state);
+      localStorage.setItem("persistantState", serialisedState);
+    } catch (e) {
+      console.warn(e);
+    }
+  }
+  
+  // load string from localStarage and convert into an Object
+  // invalid output must be undefined
+  function loadFromLocalStorage() {
+    try {
+      const serialisedState = localStorage.getItem("persistantState");
+      if (serialisedState === null) return undefined;
+      return JSON.parse(serialisedState);
+    } catch (e) {
+      console.warn(e);
+      return undefined;
+    }
+  }
 
 export default function configureStore() {
 
     const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // https://openclassrooms.com/fr/courses/7150626-utilisez-le-state-manager-redux-pour-gerer-l-etat-de-vos-applications/7286859-tirez-profit-des-redux-devtools
-    const createStoreWithMiddleware = compose(applyMiddleware(thunk), reduxDevtools)(createStore);
-    const store = createStoreWithMiddleware(reducer);    //permet d'ajouter reduxDevTools, Source: https://prograide.com/pregunta/70298/sur-react-router-comment-garder-letat-de-connexion-mme-en-rafrachissant-la-page
- 
-    //const store = createStore(reducer,  applyMiddleware(thunk)); // on crée le store avec le reducer et le state 
+    //const createStoreWithMiddleware = compose(applyMiddleware(thunk), reduxDevtools)(createStore);
+    //const store = createStoreWithMiddleware(reducer);    //permet d'ajouter reduxDevTools, Source: https://prograide.com/pregunta/70298/sur-react-router-comment-garder-letat-de-connexion-mme-en-rafrachissant-la-page
+    // identique aux 2 lignes ci dessus :
+    const store = createStore(reducer,   loadFromLocalStorage(), compose(applyMiddleware(thunk), reduxDevtools)); // on crée le store avec le reducer et le state, compose nécessaire pour ajouter  reduxDevtools 
+    store.subscribe(() => saveToLocalStorage(store.getState())); // to keep data on page reload
+
     return store;
 }
 
